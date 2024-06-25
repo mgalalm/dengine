@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
           ->has(Image::factory(3)->sequence(fn(Sequence $sequence) => ['featured' => $sequence->index === 0]))
           ->create();
 
+      // Create a user admin with password admin
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'a@infor.com',
+            'password' => bcrypt('admin'),
+        ]);
     }
 }
