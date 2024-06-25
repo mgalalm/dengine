@@ -22,7 +22,6 @@ class AddProductVariantToCart
             'quantity' => 1,
         ]);
 
-     dd($cart  );
     }
 
 
