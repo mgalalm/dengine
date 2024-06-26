@@ -30,6 +30,8 @@ class Product extends Component
 
         $this->banner('Product added to cart');
 
+        $this->dispatch('cartUpdated');
+
     }
 
     public function mount()
