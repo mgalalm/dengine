@@ -1,16 +1,22 @@
 <?php
 
 
+use App\Livewire;
+use App\Livewire\Cart;
+use App\Livewire\Product;
+use App\Livewire\StoreFront;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',
-    \App\Livewire\StoreFront::class
+    StoreFront::class
 )->name('home');
 
 //Route to the product details page
 Route::get('/product/{product}',
-    \App\Livewire\Product::class
+    Product::class
 )->name('product');
+
+Route::get('/cart', Cart::class)->name('cart');
 
 //Route::middleware([
 //    'auth:sanctum',
