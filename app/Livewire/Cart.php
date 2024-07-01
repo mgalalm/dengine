@@ -21,4 +21,17 @@ class Cart extends Component
         \App\Factories\CartFactory::make()->items()->where('id', $itemId)->delete();
         $this->dispatch('cartUpdated');
     }
+
+    public function increment($itemId)
+    {
+        \App\Factories\CartFactory::make()->items()->where('id', $itemId)->increment('quantity');
+        $this->dispatch('cartUpdated');
+    }
+
+    public function decrement($itemId)
+    {
+        // make sure it doesn't go below 1
+        \App\Factories\CartFactory::make()->items()->where('id', $itemId)->where('quantity', '>', 1)->decrement('quantity');
+        $this->dispatch('cartUpdated');
+    }
 }
