@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +14,13 @@ class CartItem extends Model
     public function variant()
     {
         return $this->belongsTo(ProductVariant::class, 'product_variant_id');
+    }
+
+    protected function subtotal(): Attribute
+    {
+        return Attribute::make(
+            get: fn () =>  $this->product->price->multiply($this->quantity),
+        );
     }
 
     public function product()
