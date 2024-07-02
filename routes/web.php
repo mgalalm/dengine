@@ -18,6 +18,11 @@ Route::get('/product/{product}',
 
 Route::get('/cart', Cart::class)->name('cart');
 
+// add checkout route
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
 //Route::middleware([
 //    'auth:sanctum',
 //    config('jetstream.auth_session'),
