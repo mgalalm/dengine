@@ -5,6 +5,7 @@
             <tr>
                 <th class="text-left"></th>
                 <th class="text-left">Product</th>
+                <th class="text-left">Price</th>
                 <th class="text-left">Size</th>
                 <th class="text-left">Color</th>
 
@@ -24,6 +25,7 @@
 
                     </td>
                     <td><span>{{ $item->product->name }}  </span></td>
+                    <td><span>{{ $item->product->price }}</span></td>
                     <td><span>Size: {{ $item->variant->size }}</span></td>
                     <td><span>Color: {{ $item->variant->color }}</span></td>
                     <td class="flex space-x-2">
@@ -48,7 +50,7 @@
 
 
                     </td>
-                    <td><span>${{ $item->subtotal }}</span></td>
+                    <td><span>{{ $item->subtotal }}</span></td>
                     <td>
                         <button wire:click="removeItem('{{ $item->id }}')" class="text-red-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -62,24 +64,31 @@
                 </tr>
             @endforeach
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" class="text-right font-medium">Total:</td>
+                <td>{{ $this->total }}</td>
+            </tfoot>
         </table>
     </div>
-    <div class="bg-white rounded-lg shadow p-5 col-span-1">
-        @guest()
-            <div class="flex flex-col space-y-4">
-                <a href="{{ route('login') }}"
-                   class="bg-blue-500 text-white text-center py-2 rounded-lg">Login</a>
-                <a href="{{ route('register') }}"
-                   class="bg-blue-500 text-white text-center py-2 rounded-lg">Register</a>
-            </div>
+    <div>
+        <div class="bg-white rounded-lg shadow p-5 col-span-1">
+            @guest()
+                <div class="flex flex-col space-y-4">
+                    <a href="{{ route('login') }}"
+                       class="bg-blue-500 text-white text-center py-2 rounded-lg">Login</a>
+                    <a href="{{ route('register') }}"
+                       class="bg-blue-500 text-white text-center py-2 rounded-lg">Register</a>
+                </div>
 
-        @endguest
-        @auth()
-            <div class="flex flex-col space-y-4">
-{{--                <h2 class="text-lg font-semibold">Total: ${{ $this->total }}</h2>--}}
-                <a href="{{ route('checkout') }}"
-                   class="bg-blue-500 text-white text-center py-2 rounded-lg">Checkout</a>
-            </div>
-        @endauth
+            @endguest
+            @auth()
+                <div class="flex flex-col space-y-4">
+                    {{--                <h2 class="text-lg font-semibold">Total: ${{ $this->total }}</h2>--}}
+                    <a href="{{ route('checkout') }}"
+                       class="bg-blue-500 text-white text-center py-2 rounded-lg">Checkout</a>
+                </div>
+            @endauth
+        </div>
     </div>
 </div>
