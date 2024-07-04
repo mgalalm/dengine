@@ -8,13 +8,13 @@ use function auth;
 
 class AddProductVariantToCart
 {
-    public function add(int $variantId): void {
+    public function add(int $variantId, $quantity = 1, $cart = null): void {
         // check if the user is logged in
         // we use the seesion_id to store the cart for guest users
-        CartFactory::make()->items()->firstOrCreate([ 'product_variant_id' => $variantId], [
+        ($cart ?: CartFactory::make())->items()->firstOrCreate([ 'product_variant_id' => $variantId], [
             'product_variant_id' => $variantId,
             'quantity' => 0,
-        ])->increment('quantity');
+        ])->increment('quantity', $quantity);
 
     }
 
