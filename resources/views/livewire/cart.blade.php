@@ -84,9 +84,8 @@
             @endguest
             @auth()
                 <div class="flex flex-col space-y-4">
-                    {{--                <h2 class="text-lg font-semibold">Total: ${{ $this->total }}</h2>--}}
-                    <a href="{{ route('checkout') }}"
-                       class="bg-blue-500 text-white text-center py-2 rounded-lg">Checkout</a>
+                    <h2 class="text-lg font-semibold">Total: {{ $this->total }}</h2>
+                   <x-button wire:click="checkout" class="text-center px-4 justify-center">Checkout</x-button>
                 </div>
             @endauth
         </div>
