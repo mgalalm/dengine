@@ -2,13 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Actions\Webshop\CreateStripeCheckoutSession;
 use Livewire\Component;
 
 class Cart extends Component
 {
     public function getCartProperty()
     {
-        return \App\Factories\CartFactory::make()->loadMissing(['items', 'items.variant', 'items.product', 'items.product.image']);
+        return \App\Factories\CartFactory::make()->loadMissing([
+            'items', 'items.variant', 'items.product', 'items.product.image'
+        ]);
     }
 
     public function getItemsProperty()
@@ -45,5 +48,10 @@ class Cart extends Component
         // make sure it doesn't go below 1
         $this->cart->items()->where('id', $itemId)->where('quantity', '>', 1)->decrement('quantity');
         $this->dispatch('cartUpdated');
+    }
+
+    public function checkout(CreateStripeCheckoutSession $createStripeCheckoutSession)
+    {
+        return $createStripeCheckoutSession->createFromCart($this->cart);
     }
 }

@@ -24,5 +24,10 @@ class Cart extends Model
             get: fn () => $this->items->reduce(fn (Money $total, CartItem $item) => $total->add($item->subtotal), new Money(0, new Currency('eur'))),
         );
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
