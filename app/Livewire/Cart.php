@@ -7,6 +7,10 @@ use Livewire\Component;
 
 class Cart extends Component
 {
+    public function mount()
+    {
+
+    }
     public function getCartProperty()
     {
         return \App\Factories\CartFactory::make()->loadMissing([

@@ -5,6 +5,7 @@ use App\Livewire;
 use App\Livewire\Cart;
 use App\Livewire\Product;
 use App\Livewire\StoreFront;
+use App\Livewire\CheckoutStatus;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',
@@ -17,6 +18,7 @@ Route::get('/product/{product}',
 )->name('product');
 
 Route::get('/cart', Cart::class)->name('cart');
+Route::get('/checkout-status', CheckoutStatus::class)->name('checkout-status');
 
 // add checkout route
 Route::get('/checkout', function () {
