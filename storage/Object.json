@@ -1,0 +1,140 @@
+{
+    "api_version": "2024-06-20",
+    "created": 1720261998,
+    "data": {
+        "object": {
+            "after_expiration": null,
+            "allow_promotion_codes": true,
+            "amount_subtotal": 16404,
+            "amount_total": 16404,
+            "automatic_tax": {
+                "enabled": true,
+                "liability": {
+                    "type": "self"
+                },
+                "status": "complete"
+            },
+            "billing_address_collection": null,
+            "cancel_url": "http://localhost:8000?checkout=cancelled",
+            "client_reference_id": null,
+            "client_secret": null,
+            "consent": null,
+            "consent_collection": null,
+            "created": 1720261861,
+            "currency": "eur",
+            "currency_conversion": null,
+            "custom_fields": [],
+            "custom_text": {
+                "after_submit": null,
+                "shipping_address": null,
+                "submit": null,
+                "terms_of_service_acceptance": null
+            },
+            "customer": "cus_QPv7ZX3K5dH492",
+            "customer_creation": null,
+            "customer_details": {
+                "address": {
+                    "city": "Limerick",
+                    "country": "IE",
+                    "line1": "19",
+                    "line2": "The Meadows Crossagalla Ros mor, Limerick",
+                    "postal_code": "V94 29A2",
+                    "state": "Limerick"
+                },
+                "email": "a@infor.com",
+                "name": "Mohamed Galal",
+                "phone": null,
+                "tax_exempt": "none",
+                "tax_ids": []
+            },
+            "customer_email": null,
+            "expires_at": 1720348261,
+            "id": "cs_test_b1A66LuIkWLa49LPAqrodhBRH0UbWeZzM5uUMgEGDs6pg9sIvLVtkVBnpx",
+            "invoice": null,
+            "invoice_creation": {
+                "enabled": false,
+                "invoice_data": {
+                    "account_tax_ids": null,
+                    "custom_fields": null,
+                    "description": null,
+                    "footer": null,
+                    "issuer": null,
+                    "metadata": {},
+                    "rendering_options": null
+                }
+            },
+            "livemode": false,
+            "locale": null,
+            "metadata": {},
+            "mode": "payment",
+            "object": "checkout.session",
+            "payment_intent": "pi_3PZVvVRsAxYj6ur00HlqiRoV",
+            "payment_link": null,
+            "payment_method_collection": "if_required",
+            "payment_method_configuration_details": null,
+            "payment_method_options": {
+                "card": {
+                    "request_three_d_secure": "automatic"
+                }
+            },
+            "payment_method_types": [
+                "card"
+            ],
+            "payment_status": "paid",
+            "phone_number_collection": {
+                "enabled": false
+            },
+            "recovered_from": null,
+            "saved_payment_method_options": {
+                "allow_redisplay_filters": [
+                    "always"
+                ],
+                "payment_method_remove": null,
+                "payment_method_save": null
+            },
+            "setup_intent": null,
+            "shipping_address_collection": {
+                "allowed_countries": [
+                    "IE",
+                    "GB"
+                ]
+            },
+            "shipping_cost": null,
+            "shipping_details": {
+                "address": {
+                    "city": "Limerick",
+                    "country": "IE",
+                    "line1": "19",
+                    "line2": "The Meadows Crossagalla Ros mor, Limerick",
+                    "postal_code": "V94 29A2",
+                    "state": "Limerick"
+                },
+                "name": "Mohamed Galal"
+            },
+            "shipping_options": [],
+            "status": "complete",
+            "submit_type": null,
+            "subscription": null,
+            "success_url": "http://localhost:8000?checkout=success",
+            "tax_id_collection": {
+                "enabled": true
+            },
+            "total_details": {
+                "amount_discount": 0,
+                "amount_shipping": 0,
+                "amount_tax": 3067
+            },
+            "ui_mode": "hosted",
+            "url": null
+        }
+    },
+    "id": "evt_1PZVvfRsAxYj6ur0UfPPNdtA",
+    "livemode": false,
+    "object": "event",
+    "pending_webhooks": 2,
+    "request": {
+        "id": null,
+        "idempotency_key": null
+    },
+    "type": "checkout.session.completed"
+}
