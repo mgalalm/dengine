@@ -35,22 +35,17 @@ class Cart extends Component
         return view('livewire.cart');
     }
 
-    public function removeItem($itemId)
-    {
-        $this->cart->items()->where('id', $itemId)->delete();
-        $this->dispatch('cartUpdated');
-    }
 
     public function increment($itemId)
     {
-        $this->cart->items()->where('id', $itemId)->increment('quantity');
+        $this->cart->items->find($itemId)?->increment('quantity');
         $this->dispatch('cartUpdated');
     }
 
     public function decrement($itemId)
     {
         // make sure it doesn't go below 1
-        $this->cart->items()->where('id', $itemId)->where('quantity', '>', 1)->decrement('quantity');
+        $this->cart->items->find($itemId)?->decrement('quantity');
         $this->dispatch('cartUpdated');
     }
 
@@ -58,4 +53,15 @@ class Cart extends Component
     {
         return $createStripeCheckoutSession->createFromCart($this->cart);
     }
+
+    public function removeItem($itemId)
+    {
+        $this->cart->items->find($itemId)?->delete();
+
+
+        $this->dispatch('cartUpdated');
+
+        return redirect()->route('cart');
+    }
+
 }

@@ -1,5 +1,5 @@
 <div class="grid grid-cols-4  mt-12 gap-4">
-    <div class="bg-white rounded-lg shadow p-5 col-span-3">
+    <x-panel class="col-span-3">
         <table class="w-full">
             <thead>
             <tr>
@@ -17,7 +17,7 @@
             </thead>
             <tbody>
             @foreach($this->items as $item)
-                <tr>
+                <tr wire:key="{{ $item->id }}" >
                     <td class="flex items-center">
 
                         <img src="{{ $item->product->image->path }}" alt="{{ $item->product->name }}" class="h-8 w-8">
@@ -29,7 +29,7 @@
                     <td><span>Size: {{ $item->variant->size }}</span></td>
                     <td><span>Color: {{ $item->variant->color }}</span></td>
                     <td class="flex space-x-2">
-                        <button wire:click="increment('{{ $item->id }}')">
+                        <button wire:click="increment({{ $item->id }})">
 
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="size-5">
@@ -38,8 +38,8 @@
 
 
                         </button>
-                        <span>{{ $item->quantity }}</span>
-                        <button wire:click="decrement('{{ $item->id }}')" @disabled($item->quantity == 1)>
+                        <div>{{ $item->quantity }}</div>
+                        <button wire:click="decrement({{ $item->id }})" @disabled($item->quantity == 1)>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="size-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"/>
@@ -52,7 +52,7 @@
                     </td>
                     <td><span>{{ $item->subtotal }}</span></td>
                     <td>
-                        <button wire:click="removeItem('{{ $item->id }}')" class="text-red-500">
+                        <button wire:click="removeItem({{ $item->id }})" class="text-red-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="size-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -67,12 +67,14 @@
             <tfoot>
             <tr>
                 <td colspan="6" class="text-right font-medium">Total:</td>
-                <td>{{ $this->total }}</td>
+                <td class="font-medium text-right">{{ $this->total }}</td>
+
+            </tr>
             </tfoot>
         </table>
-    </div>
+    </x-panel>
     <div>
-        <div class="bg-white rounded-lg shadow p-5 col-span-1">
+        <x-panel class="col-span-1">
             @guest()
                 <div class="flex flex-col space-y-4">
                     <a href="{{ route('login') }}"
@@ -85,9 +87,9 @@
             @auth()
                 <div class="flex flex-col space-y-4">
                     <h2 class="text-lg font-semibold">Total: {{ $this->total }}</h2>
-                   <x-button wire:click="checkout" class="text-center px-4 justify-center">Checkout</x-button>
+                   <x-button wire:click="checkout" class="w-full justify-center">Checkout</x-button>
                 </div>
             @endauth
-        </div>
+        </x-panel>
     </div>
 </div>

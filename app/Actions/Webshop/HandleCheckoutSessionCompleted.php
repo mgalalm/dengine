@@ -2,9 +2,11 @@
 
 namespace App\Actions\Webshop;
 
+use App\Mail\OrderConfirmation;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
 use Stripe\LineItem;
 use function collect;
@@ -15,13 +17,14 @@ class HandleCheckoutSessionCompleted
         // get the cart from the session
 
         DB::transaction(function () use ($sessionId) {
+            // Get the session
             $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
-            \Log::info('Session');
-            \Log::info($session);
-            $user = User::find($session->metadata->user_id);
 
+            // Get the user and cart from the session metadata
+            $user = User::find($session->metadata->user_id);
             $cart = Cart::find($session->metadata->cart_id);
 
+            // Create the order
             $order = $user->orders()->create([
                 'stripe_checkout_session_id' => $sessionId,
                 'amount_shipping' => $session->total_details->amount_shipping,
@@ -52,7 +55,10 @@ class HandleCheckoutSessionCompleted
                 ],
             ]);
 
+            // Get the line items from the session
             $lineItems = Cashier::stripe()->checkout->sessions->allLineItems($sessionId);
+
+            // Create the order items
             $orderItems = collect($lineItems->all())->map(function(LineItem $lineItem) {
 
                 $product = Cashier::stripe()->products->retrieve($lineItem->price->product);
@@ -71,8 +77,13 @@ class HandleCheckoutSessionCompleted
             });
 
             $order->items()->createMany($orderItems->toArray());
+
+            // Empty the cart
             $cart->items()->delete();
             $cart->delete();
+
+            // Send the order confirmation email
+            Mail::to($user)->send(new OrderConfirmation($order));
         });
 
     }
