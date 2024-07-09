@@ -4,6 +4,7 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Wireable;
 use Money\Currency;
 use Money\Money;
 
@@ -28,4 +29,7 @@ class MoneyCast implements CastsAttributes
     {
         return $value;
     }
+
+
+
 }
