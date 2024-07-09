@@ -31,6 +31,8 @@ class ProductResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->label('Price')
+                    ->prefixIcon('heroicon-o-currency-euro')
+                    ->hint('Price in cents')
                     ->required(),
 
             ]);

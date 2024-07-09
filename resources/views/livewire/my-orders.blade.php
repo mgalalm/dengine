@@ -25,5 +25,9 @@
 </tbody>
         </table>
     </x-panel>
+    <div class="mt-6">
+        {{ $this->orders->links() }}
+    </div>
+
 
 </div>

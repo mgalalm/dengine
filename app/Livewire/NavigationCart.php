@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Factories\CartFactory;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class NavigationCart extends Component
@@ -12,8 +13,8 @@ class NavigationCart extends Component
     {
         return view('livewire.navigation-cart');
     }
-
-    public function getCountProperty()
+    #[Computed]
+    public function count()
     {
         return CartFactory::make()->items()->sum('quantity');
     }
