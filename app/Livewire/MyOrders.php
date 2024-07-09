@@ -2,13 +2,17 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class MyOrders extends Component
 {
-    public function getOrdersProperty()
+    use WithPagination;
+    #[Computed]
+    public function orders()
     {
-        return auth()->user()->orders;
+        return auth()->user()->orders()->paginate(5);
     }
 
     public function render()
