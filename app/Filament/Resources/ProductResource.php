@@ -34,6 +34,7 @@ class ProductResource extends Resource
                     ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull()
+                    ->toolbarButtons(['bold', 'italic', 'underline', 'unorderedList', 'orderedList'])
                     ->label('Description')
                     ->required(),
 
