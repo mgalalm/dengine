@@ -26,13 +26,15 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
                     ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->label('Description')
-                    ->required(),
+
                 Forms\Components\TextInput::make('price')
                     ->label('Price')
                     ->prefixIcon('heroicon-o-currency-euro')
                     ->hint('Price in cents')
+                    ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->columnSpanFull()
+                    ->label('Description')
                     ->required(),
 
             ]);

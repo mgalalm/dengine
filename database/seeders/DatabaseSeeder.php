@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Image;
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
       Product::factory(4)
           ->hasVariants(5)
+          ->has(Category::factory(1))
           ->has(Image::factory(3)->sequence(fn(Sequence $sequence) => ['featured' => $sequence->index === 0]))
           ->create();
 

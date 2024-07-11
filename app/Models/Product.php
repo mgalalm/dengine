@@ -49,4 +49,9 @@ class Product extends Model
         return $this->hasOne(Image::class)->ofMany('featured', aggregate: 'max');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }
