@@ -23,7 +23,83 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('id')
+                    ->label('Order number')
+                    ->disabled(),
+                Forms\Components\TextInput::make('user_id')
+                    ->label('User ID')
+                    ->disabled(),
+                Forms\Components\TextInput::make('stripe_checkout_session_id')
+                    ->label('Stripe Checkout Session ID')
+                    ->disabled(),
+                Forms\Components\TextInput::make('amount_shipping')
+                    ->label('Shipping amount')
+                    ->disabled(),
+                Forms\Components\TextInput::make('amount_discount')
+                    ->label('Discount amount')
+                    ->disabled(),
+                Forms\Components\TextInput::make('amount_tax')
+                    ->label('Tax amount')
+                    ->disabled(),
+                Forms\Components\TextInput::make('amount_subtotal')
+                    ->label('Subtotal amount')
+                    ->disabled(),
+                Forms\Components\TextInput::make('amount_total')
+                    ->label('Total amount')
+                    ->disabled(),
+               Forms\Components\Fieldset::make('shipping_address')
+                    ->label('Shipping address')
+                    ->schema([
+                        Forms\Components\TextInput::make('shipping_address.line1')
+                            ->label('Address line 1')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('shipping_address.line2')
+                            ->label('Address line 2')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('shipping_address.city')
+                            ->label('City')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('shipping_address.state')
+                            ->label('State')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('shipping_address.postal_code')
+                            ->label('Postal code')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('shipping_address.country')
+                            ->label('Country')
+                            ->disabled(),
+                    ]),
+                Forms\Components\Fieldset::make('billing_address')
+                    ->label('Billing address')
+                    ->schema([
+                        Forms\Components\TextInput::make('billing_address.line1')
+                            ->label('Address line 1')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('billing_address.line2')
+                            ->label('Address line 2')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('billing_address.city')
+                            ->label('City')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('billing_address.state')
+                            ->label('State')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('billing_address.postal_code')
+                            ->label('Postal code')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('billing_address.country')
+                            ->label('Country')
+                            ->disabled(),
+                    ]),
+
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'processing' => 'Processing',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -32,7 +108,13 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('Order #')
+                    ->label('Order number')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('user_id')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('status')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

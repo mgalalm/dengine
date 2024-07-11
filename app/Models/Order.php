@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-
     public $casts = [
         'billing_address' => 'collection',
         'shipping_address' => 'collection',
