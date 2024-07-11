@@ -37,6 +37,15 @@ class ProductResource extends Resource
                     ->toolbarButtons(['bold', 'italic', 'underline', 'unorderedList', 'orderedList'])
                     ->label('Description')
                     ->required(),
+                Forms\Components\Select::make('categories')
+                    ->columnSpanFull()
+                    ->multiple()
+                    ->relationship('categories', 'name'),
+                Forms\Components\Toggle::make('is_published')
+                ->default(true),
+                Forms\Components\Toggle::make('is_featured')
+                ->default(false),
+
 
             ]);
     }
