@@ -27,6 +27,7 @@ class StoreFront extends Component
     public function  products()
     {
         return Product::query()
+            ->where('is_published', true)
             ->when($this->search, fn($query) => $query->where('name', 'like', "%{$this->search}%"))
             ->when($this->category, function ($query) {
                 $query->whereHas('categories', function ($query) {

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('price');
+            $table->boolean('is_featured')->default(false);
+            $table->boolean('is_published')->default(true);
             $table->timestamps();
         });
     }
