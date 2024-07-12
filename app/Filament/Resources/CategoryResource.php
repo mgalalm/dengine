@@ -26,7 +26,16 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                 Forms\Components\Select::make('parent_id')
+                     ->relationship('parent', 'name', modifyQueryUsing: function (Builder $query) {
+                         return $query->whereNull('parent_id');
+                     }  )
+                     ->placeholder('Select a parent category')
+                     ->nullable(),
+
+
             ]);
+
     }
 
     public static function table(Table $table): Table

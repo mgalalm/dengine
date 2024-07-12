@@ -37,10 +37,22 @@ class ProductResource extends Resource
                     ->toolbarButtons(['bold', 'italic', 'underline', 'unorderedList', 'orderedList'])
                     ->label('Description')
                     ->required(),
-                Forms\Components\Select::make('categories')
-                    ->columnSpanFull()
-                    ->multiple()
-                    ->relationship('categories', 'name'),
+
+//                Forms\Components\Select::make('categories')
+//                    ->live()
+//                    ->name('parent')
+//                    ->label('Parent Category')
+//                    ->relationship('categories', 'name', modifyQueryUsing: function (Builder $query) {
+//
+//                        return $query->whereNull('parent_id');
+//                    }),
+//                Forms\Components\Select::make('categories')
+////                    ->multiple()
+//                    ->relationship('categories', 'name', modifyQueryUsing: function (Builder $query, Forms\Get $get) {
+//                        return $query->where('parent_id', $get('categories'));
+//                    }),
+
+
                 Forms\Components\Toggle::make('is_published')
                 ->default(true),
                 Forms\Components\Toggle::make('is_featured')
@@ -81,6 +93,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\CategoriesRelationManager::class,
             RelationManagers\VariantsRelationManager::class,
             RelationManagers\ImagesRelationManager::class,
         ];
