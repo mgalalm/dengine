@@ -52,18 +52,23 @@ class CategoriesRelationManager extends RelationManager
                             ->getRecordSelect()
                             ->live(),
                         Forms\Components\Select::make('subcategoryId')
+                            ->label('Subcategory')
                             ->relationship('parent', 'name', modifyQueryUsing: function (Builder $query, Get $get) {
                                 return $query->where('parent_id', $get('recordId'));
                             })
                             ->placeholder('Select a parent category')
-                            ->nullable(),
+                            ->searchable()
+                            ->multiple()
+                            ->preload()
+                            ->nullable()
+                            ->dehydrated()
+                        ,
                     ])
                     ->recordSelectOptionsQuery(function (Builder $query) {
                         return $query->whereNull('parent_id');
                     })->mutateFormDataUsing(function (array $data) {
                         $data['recordId'] = $data['subcategoryId'];
                         return $data;
-//
                     }),
 
 
