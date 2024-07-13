@@ -24,32 +24,52 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
-                    ->label('Order number')
-                    ->disabled(),
-                Forms\Components\TextInput::make('user_id')
-                    ->label('User ID')
-                    ->disabled(),
-                Forms\Components\TextInput::make('stripe_checkout_session_id')
-                    ->label('Stripe Checkout Session ID')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount_shipping')
-                    ->label('Shipping amount')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount_discount')
-                    ->label('Discount amount')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount_tax')
-                    ->label('Tax amount')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount_subtotal')
-                    ->label('Subtotal amount')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount_total')
-                    ->label('Total amount')
-                    ->disabled(),
-               Forms\Components\Fieldset::make('shipping_address')
-                    ->label('Shipping address')
+                Forms\Components\Section::make('Order Summary')
+                    ->collapsible()
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('id')
+                            ->label('Order number')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('amount_shipping')
+                            ->label('Shipping amount')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('amount_discount')
+                            ->label('Discount amount')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('amount_tax')
+                            ->label('Tax amount')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('amount_subtotal')
+                            ->label('Subtotal amount')
+                            ->disabled(),
+                        Forms\Components\TextInput::make('amount_total')
+                            ->label('Total amount')
+                            ->disabled(),
+                        Forms\Components\Select::make('status')
+                            ->enum(OrderStatus::class)
+                            ->options(OrderStatus::class )
+                            ->required(),
+                    ]),
+
+                Forms\Components\Section::make('Customer Information')
+                    ->collapsible()
+//                    ->aside()
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\Select::make('user.name')
+                            ->relationship('user', 'name')
+                            ->label('Name')
+                            ->disabled(),
+                        Forms\Components\Select::make('user.email')
+                            ->relationship('user', 'email')
+                            ->label('Name')
+                            ->disabled(),
+                    ]),
+
+                Forms\Components\Section::make('Shipping address')
+                    ->collapsible()
+                    ->columns(2)
                     ->schema([
                         Forms\Components\TextInput::make('shipping_address.line1')
                             ->label('Address line 1')
@@ -70,7 +90,10 @@ class OrderResource extends Resource
                             ->label('Country')
                             ->disabled(),
                     ]),
-                Forms\Components\Fieldset::make('billing_address')
+                Forms\Components\Section::make('Billing address')
+                    ->collapsible()
+                    ->collapsed()
+                    ->columns(2)
                     ->label('Billing address')
                     ->schema([
                         Forms\Components\TextInput::make('billing_address.line1')
@@ -93,10 +116,6 @@ class OrderResource extends Resource
                             ->disabled(),
                     ]),
 
-                Forms\Components\Select::make('status')
-                    ->enum(OrderStatus::class)
-                    ->options(OrderStatus::class )
-                    ->required(),
             ]);
     }
 

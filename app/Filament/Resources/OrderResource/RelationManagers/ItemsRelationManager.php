@@ -32,6 +32,7 @@ class ItemsRelationManager extends RelationManager
             ->columns([
 //                Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('quantity'),
             ])
