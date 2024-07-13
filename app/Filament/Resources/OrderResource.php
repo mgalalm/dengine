@@ -29,28 +29,22 @@ class OrderResource extends Resource
                     ->columns(2)
                     ->schema([
                         Forms\Components\TextInput::make('id')
-                            ->label('Order number')
-                            ->disabled(),
+                            ->label('Order number'),
                         Forms\Components\TextInput::make('amount_shipping')
-                            ->label('Shipping amount')
-                            ->disabled(),
+                            ->label('Shipping amount'),
                         Forms\Components\TextInput::make('amount_discount')
-                            ->label('Discount amount')
-                            ->disabled(),
+                            ->label('Discount amount'),
                         Forms\Components\TextInput::make('amount_tax')
-                            ->label('Tax amount')
-                            ->disabled(),
+                            ->label('Tax amount'),
                         Forms\Components\TextInput::make('amount_subtotal')
-                            ->label('Subtotal amount')
-                            ->disabled(),
+                            ->label('Subtotal amount'),
                         Forms\Components\TextInput::make('amount_total')
-                            ->label('Total amount')
-                            ->disabled(),
+                            ->label('Total amount'),
                         Forms\Components\Select::make('status')
                             ->enum(OrderStatus::class)
                             ->options(OrderStatus::class )
                             ->required(),
-                    ]),
+                    ])->disabled(fn (string $operation) => $operation !== 'create'),
 
                 Forms\Components\Section::make('Customer Information')
                     ->collapsible()
@@ -59,37 +53,29 @@ class OrderResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('user.name')
                             ->relationship('user', 'name')
-                            ->label('Name')
-                            ->disabled(),
+                            ->label('Name'),
                         Forms\Components\Select::make('user.email')
                             ->relationship('user', 'email')
-                            ->label('Name')
-                            ->disabled(),
-                    ]),
+                            ->label('Email'),
+                    ])->disabled(fn (string $operation) => $operation !== 'create'),
 
                 Forms\Components\Section::make('Shipping address')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
                         Forms\Components\TextInput::make('shipping_address.line1')
-                            ->label('Address line 1')
-                            ->disabled(),
+                            ->label('Address line 1'),
                         Forms\Components\TextInput::make('shipping_address.line2')
-                            ->label('Address line 2')
-                            ->disabled(),
+                            ->label('Address line 2'),
                         Forms\Components\TextInput::make('shipping_address.city')
-                            ->label('City')
-                            ->disabled(),
+                            ->label('City'),
                         Forms\Components\TextInput::make('shipping_address.state')
-                            ->label('State')
-                            ->disabled(),
+                            ->label('State'),
                         Forms\Components\TextInput::make('shipping_address.postal_code')
-                            ->label('Postal code')
-                            ->disabled(),
+                            ->label('Postal code'),
                         Forms\Components\TextInput::make('shipping_address.country')
-                            ->label('Country')
-                            ->disabled(),
-                    ]),
+                            ->label('Country'),
+                    ])->disabled(fn (string $operation) => $operation !== 'create'),
                 Forms\Components\Section::make('Billing address')
                     ->collapsible()
                     ->collapsed()
@@ -97,24 +83,18 @@ class OrderResource extends Resource
                     ->label('Billing address')
                     ->schema([
                         Forms\Components\TextInput::make('billing_address.line1')
-                            ->label('Address line 1')
-                            ->disabled(),
+                            ->label('Address line 1'),
                         Forms\Components\TextInput::make('billing_address.line2')
-                            ->label('Address line 2')
-                            ->disabled(),
+                            ->label('Address line 2'),
                         Forms\Components\TextInput::make('billing_address.city')
-                            ->label('City')
-                            ->disabled(),
+                            ->label('City'),
                         Forms\Components\TextInput::make('billing_address.state')
-                            ->label('State')
-                            ->disabled(),
+                            ->label('State'),
                         Forms\Components\TextInput::make('billing_address.postal_code')
-                            ->label('Postal code')
-                            ->disabled(),
+                            ->label('Postal code'),
                         Forms\Components\TextInput::make('billing_address.country')
                             ->label('Country')
-                            ->disabled(),
-                    ]),
+                    ])->disabled(fn (string $operation) => $operation !== 'create'),
 
             ]);
     }
