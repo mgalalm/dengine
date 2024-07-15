@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Casts\MoneyCast;
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
     use HasFactory;
-
     public $casts = [
         'billing_address' => 'collection',
         'shipping_address' => 'collection',
@@ -18,10 +18,16 @@ class Order extends Model
         'amount_tax' => MoneyCast::class,
         'amount_subtotal' => MoneyCast::class,
         'amount_shipping' => MoneyCast::class,
+        'status' => OrderStatus::class,
     ];
 
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

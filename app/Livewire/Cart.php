@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Actions\Webshop\CreateStripeCheckoutSession;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Cart extends Component
@@ -11,21 +12,25 @@ class Cart extends Component
     {
 
     }
-    public function getCartProperty()
+
+    #[Computed]
+    public function cart()
     {
         return \App\Factories\CartFactory::make()->loadMissing([
             'items', 'items.variant', 'items.product', 'items.product.image'
         ]);
     }
 
-    public function getItemsProperty()
+    #[Computed]
+    public function items()
     {
 
         return $this->cart->items;
     }
 
 
-    public function getTotalProperty()
+    #[Computed]
+    public function total()
     {
         return $this->cart->total;
     }
