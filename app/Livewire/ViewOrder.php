@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use function auth;
 
@@ -19,7 +20,8 @@ class ViewOrder extends Component
         return view('livewire.view-order');
     }
 
-    public function getOrderProperty()
+    #[Computed]
+    public function order()
     {
         return auth()->user()->orders()->findOrFail($this->orderId);
     }

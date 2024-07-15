@@ -19,7 +19,7 @@
     <div>
        <h1 class="text-3xl font-medium"> {{ $product->name }}</h1>
         <div class="mt-4">
-            {{ $product->description }}
+            {!! $product->description  !!}
         </div>
         <!-- add all variations of this product -->
         <div class="mt-4 space-y-4">

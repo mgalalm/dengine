@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 use App\Actions\Webshop\AddProductVariantToCart;
+use App\Casts\MoneyCast;
 use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\Component;
 
@@ -13,6 +14,10 @@ class Product extends Component
     public $variant;
     public $rules = [
         'variant' => ['required', 'exists:App\Models\ProductVariant,id']
+    ];
+
+    protected $casts = [
+        'price' => MoneyCast::class,
     ];
     public function render()
     {
