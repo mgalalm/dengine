@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,6 +44,7 @@ class OrderResource extends Resource
                         Forms\Components\Select::make('status')
                             ->enum(OrderStatus::class)
                             ->options(OrderStatus::class )
+                            ->default(OrderStatus::Pending)
                             ->required(),
                     ])->disabled(fn (string $operation) => $operation !== 'create'),
 
@@ -51,12 +53,13 @@ class OrderResource extends Resource
 //                    ->aside()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\Select::make('user.name')
+                        Forms\Components\Select::make('user_id')
+                            ->options(fn () => \App\Models\User::pluck('name', 'id'))
                             ->relationship('user', 'name')
                             ->label('Name'),
-                        Forms\Components\Select::make('user.email')
-                            ->relationship('user', 'email')
-                            ->label('Email'),
+                        Forms\Components\TextInput::make('stripe_checkout_session_id')
+                            ->label('Stripe checkout session id'),
+
                     ])->disabled(fn (string $operation) => $operation !== 'create'),
 
                 Forms\Components\Section::make('Shipping address')
@@ -76,6 +79,7 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('shipping_address.country')
                             ->label('Country'),
                     ])->disabled(fn (string $operation) => $operation !== 'create'),
+
                 Forms\Components\Section::make('Billing address')
                     ->collapsible()
                     ->collapsed()
@@ -96,7 +100,26 @@ class OrderResource extends Resource
                             ->label('Country')
                     ])->disabled(fn (string $operation) => $operation !== 'create'),
 
+
+                Forms\Components\Actions::make(
+                    [
+                        Action::make('star')
+                            ->label('Create Sample order')
+                            ->icon('heroicon-o-star')
+                            ->action(function ($livewire)  {
+//                                dd($livewire->form->getState()['shipping_address']);
+                                $data = Order::factory()->make()->toArray();
+                                $livewire->form->fill($data);
+
+//                                $livewire->form->fill([
+//                                    'billing_address' => $livewire->form->getState()['shipping_address']
+//                                ]);
+                            })
+                    ]
+                ),
+
             ]);
+
     }
 
     public static function table(Table $table): Table
