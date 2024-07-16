@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // create a new directory for the images if it does not exist
+        if (!File::exists(storage_path('app/public/images')))
+            File::makeDirectory(storage_path('app/public/images'));
+
         // move images from public to storage
         $files = File::allFiles(public_path('images'));
         foreach ($files as $file) {
