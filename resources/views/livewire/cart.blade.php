@@ -20,7 +20,7 @@
                 <tr wire:key="{{ $item->id }}" >
                     <td class="flex items-center">
 
-                        <img src="{{ $item->product->image->path }}" alt="{{ $item->product->name }}" class="h-8 w-8">
+                        <img src="{{ Storage::url($item->product->image->path) }}" alt="{{ $item->product->name }}" class="h-8 w-8">
 
 
                     </td>
