@@ -1,5 +1,5 @@
 <div class="grid grid-cols-2 gap-10 py-12">
-    <div class="space-y-4" x-data="{ image: '/{{ $product->image->path }}' }">
+    <div class="space-y-4" x-data="{ image: '{{ Storage::url($product->image->path) }}' }">
         <div class="bg-white p-5 rounded-lg shadow">
             <img x-bind:src="image">
         </div>
@@ -8,7 +8,7 @@
             <div class="grid grid-cols-4 gap-4">
                 @foreach($product->images as $image)
                     <div class="rounded bg-white p-2 rounded shadow">
-                         <img src="/{{ $image->path }}" class="rounded" @click="image = '/{{ $image->path }}'">
+                         <img src="{{ Storage::url($image->path) }}" class="rounded" @click="image = '/{{ $image->path }}'">
                     </div>
                 @endforeach
             </div>

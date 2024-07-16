@@ -19,6 +19,9 @@ class ImagesRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('path')
+                    ->directory('images')
+                    ->image()
+                    ->imageEditor()
                     ->required()
 //                    ->maxLength(255),
             ]);
