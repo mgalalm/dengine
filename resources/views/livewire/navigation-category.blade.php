@@ -1,68 +1,42 @@
-<div class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] md:[--trigger:hover] py-3 md:px-3 md:py-6">
-    <button type="button" class="flex items-center w-full text-gray-800 hover:text-gray-600 font-medium dark:text-neutral-200 dark:hover:text-neutral-500">
-        {{ __('Categories') }}
-        <svg class="flex-shrink-0 ms-2 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
+<ul>
+    <li class="relative group inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+        <button>Products</button>
+        <div
+            class="absolute top-0 left-0 group-hover:translate-y-5 translate-y-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 z-50 min-w-[560px] transform">
+            <div class="relative top-6 p-6 bg-white rounded-xl shadow-xl w-full">
+                <div
+                    class="w-10 h-10 bg-white transform rotate-45 absolute top-0 z-0 translate-x-0 transition-transform group-hover:translate-x-[12rem] duration-500 ease-in-out rounded-sm"
+                ></div>
 
-    <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 md:w-[705px] lg:w-[750px] hidden z-10 top-full end-0 overflow-hidden bg-white md:shadow-2xl rounded-lg dark:bg-neutral-800 dark:divide-neutral-700 before:absolute before:-top-5 before:start-0 before:w-full before:h-5">
-        <div class="grid grid-cols-2 md:grid-cols-12 w-full">
-            @for ($i = 0; $i < 4; $i++)
-{{--                <div class="md:col-span-2">--}}
-{{--                    <div class="flex flex-col py-6 px-3 md:px-6">--}}
-{{--                        <div class="space-y-4">--}}
-{{--                            <span class="mb-2 text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Category {{ $i + 1 }}</span>--}}
+                <div class="relative z-10">
 
-{{--                            <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">--}}
-{{--                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3"/><rect width="7" height="7" x="14" y="3"/><rect width="7" height="7" x="14" y="14"/><rect width="7" height="7" x="3" y="14"/></svg>--}}
-{{--                                <div class="grow">--}}
-{{--                                    <p>Subcategory 1</p>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
+                    <div class="grid grid-cols-4 gap-6">
+                        @foreach($this->parents as $parent)
+                            <div class="col-span-1">
+                                <p class="uppercase tracking-wider text-gray-500 font-medium text-[13px]">
+                                    {{ $parent->name }}
+                                </p>
+                                <ul class="mt-3 text-[15px]">
+                                    @foreach($this->getChildren($parent->id) as $child)
+                                        <li>
+                                            <a
+                                                href="{{ route('home', array('category' => $child->id)) }}"
+                                                class="block p-2 -mx-2 rounded-lg hover:bg-gradient-to-br hover:from-indigo-50 hover:to-pink-50 hover:via-blue-50 transition ease-in-out duration-300 text-gray-800 font-semibold hover:text-indigo-600"
+                                            >
+                                                {{ $child->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
 
-            <div class="md:col-span-3">
-                <div class="flex flex-col py-6 px-3 md:px-6">
-                    <div class="space-y-4">
-                        <span class="mb-2 text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">About us</span>
 
-                        <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">
-                            <div class="grow">
-                                <p>Support Docs</p>
+                                </ul>
                             </div>
-                        </a>
-
-                        <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">
-                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="14" y="3" rx="1"/><path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"/></svg>
-                            <div class="grow">
-                                <p>Integrations</p>
-                            </div>
-                        </a>
-
-                        <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">
-                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
-                            <div class="grow">
-                                <p>Guides</p>
-                            </div>
-                        </a>
-
-                        <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">
-                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
-                            <div class="grow">
-                                <p>API Reference</p>
-                            </div>
-                        </a>
-
-                        <a class="flex gap-x-4 text-gray-800 hover:text-blue-600 dark:text-neutral-200" href="#">
-                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                            <div class="grow">
-                                <p>API Status</p>
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            @endfor
-
 
         </div>
-    </div>
-</div>
+
+    </li>
+</ul>

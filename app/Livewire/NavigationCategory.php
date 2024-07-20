@@ -17,4 +17,15 @@ class NavigationCategory extends Component
     {
         return Category::all();
     }
+    #[Computed]
+    public function parents()
+    {
+        return Category::whereNull('parent_id')->get();
+    }
+
+    #[Computed]
+    public function getChildren($id)
+    {
+        return Category::where('parent_id', $id)->get();
+    }
 }

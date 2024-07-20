@@ -1,20 +1,20 @@
 <div class="mt-8">
     <div class="container mx-auto grid grid-cols-12 gap-8 px-4 mb-2">
 
-        <div class="col-span-12 md:col-span-4">
-            <x-dropdown>
-                <x-slot name="trigger">
-                    <x-button>Categories</x-button>
-                </x-slot>
-                <x-slot name="content">
-                    <x-dropdown-link href="/">All</x-dropdown-link>
-                    @foreach($this->categories as $category)
-                        <x-dropdown-link href="?category={{ $category->id }}"
-                                         :active="$this->category">{{ $category->name }}</x-dropdown-link>
-                    @endforeach
-                </x-slot>
-            </x-dropdown>
-        </div>
+{{--        <div class="col-span-12 md:col-span-4">--}}
+{{--            <x-dropdown>--}}
+{{--                <x-slot name="trigger">--}}
+{{--                    <x-button>Categories</x-button>--}}
+{{--                </x-slot>--}}
+{{--                <x-slot name="content">--}}
+{{--                    <x-dropdown-link href="/">All</x-dropdown-link>--}}
+{{--                    @foreach($this->categories as $category)--}}
+{{--                        <x-dropdown-link href="?category={{ $category->id }}"--}}
+{{--                                         :active="$this->category">{{ $category->name }}</x-dropdown-link>--}}
+{{--                    @endforeach--}}
+{{--                </x-slot>--}}
+{{--            </x-dropdown>--}}
+{{--        </div>--}}
         <div class="col-span-12 md:col-span-8">
 
             <x-input wire:model.live.debounce="search" placeholder="Search products" class="w-full"></x-input>
