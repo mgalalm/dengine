@@ -28,7 +28,7 @@
         @foreach($this->products as $product)
 
             <x-panel class="relative col-span-12 grid grid-cols-5 border p-4 sm:col-span-6 sm:grid-cols-1 sm:grid-rows-[max-content_1fr] md:col-span-4 lg:col-span-3">
-                <a wire:navigate href={{ route('product', $product) }} href=""
+                <a wire:navigate href="{{ route('product', $product) }}"
                    class="absolute inset-0 w-full h-full"></a>
 
                 <div class="col-span-2 mr-4 flex sm:col-span-1 sm:mb-4 sm:mr-0 sm:h-[17em"><img src="{{ Storage::url($product->image?->path) }}" class="rounded"></div>
