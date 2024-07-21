@@ -16,6 +16,8 @@ class StoreFront extends Component
     #[Url]
     public $search = '';
 
+
+
     #[Url]
     public $category;
     public function render()

@@ -1,30 +1,42 @@
 <div class="mt-8">
-    <div class="container mx-auto grid grid-cols-12 gap-8 px-4 mb-2">
+    <div class="container mx-auto grid grid-cols-12 gap-12 px-4 mb-2">
+{{--        <div class="col-span-12 md:col-span-10">--}}
 
-{{--        <div class="col-span-12 md:col-span-4">--}}
+{{--            <x-input wire:model.live.debounce="search" placeholder="Search products" class="w-full"></x-input>--}}
+{{--        </div>--}}
+{{--        <div class="col-span-12 md:col-span-2">--}}
 {{--            <x-dropdown>--}}
 {{--                <x-slot name="trigger">--}}
-{{--                    <x-button>Categories</x-button>--}}
+{{--                    <x-button>Sort</x-button>--}}
 {{--                </x-slot>--}}
 {{--                <x-slot name="content">--}}
-{{--                    <x-dropdown-link href="/">All</x-dropdown-link>--}}
-{{--                    @foreach($this->categories as $category)--}}
-{{--                        <x-dropdown-link href="?category={{ $category->id }}"--}}
-{{--                                         :active="$this->category">{{ $category->name }}</x-dropdown-link>--}}
-{{--                    @endforeach--}}
+{{--                    <x-dropdown-link href="?sort=price_asc">Price: Low to High</x-dropdown-link>--}}
+{{--                    <x-dropdown-link href="?sort=price_desc" >Price: High to Low</x-dropdown-link>--}}
 {{--                </x-slot>--}}
 {{--            </x-dropdown>--}}
 {{--        </div>--}}
-        <div class="col-span-12 md:col-span-8">
 
-            <x-input wire:model.live.debounce="search" placeholder="Search products" class="w-full"></x-input>
-        </div>
 
     </div>
 
 
 
     <div class="container mx-auto grid grid-cols-12 gap-8 px-4">
+        <div class="col-span-12 md:col-span-8 lg:col-span-9">
+
+            <x-input wire:model.live.debounce="search" placeholder="Search products" class="w-full"></x-input>
+        </div>
+        <div class="col-span-12 md:col-span-3 md:col-span-4">
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <x-button class="w-full  justify-center">Sort</x-button>
+                </x-slot>
+                <x-slot name="content">
+                    <x-dropdown-link href="?sort=price_asc">Price: Low to High</x-dropdown-link>
+                    <x-dropdown-link href="?sort=price_desc" >Price: High to Low</x-dropdown-link>
+                </x-slot>
+            </x-dropdown>
+        </div>
         @foreach($this->products as $product)
 
             <x-panel class="relative col-span-12 grid grid-cols-5 border p-4 sm:col-span-6 sm:grid-cols-1 sm:grid-rows-[max-content_1fr] md:col-span-4 lg:col-span-3">
