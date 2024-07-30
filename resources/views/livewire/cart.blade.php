@@ -1,13 +1,13 @@
 <div class="grid grid-cols-4  mt-12 gap-4">
-    <x-panel class="col-span-3">
+    <x-panel class="md:col-span-3 col-span-4 order-2 md:order-first">
         <table class="w-full">
             <thead>
             <tr>
-                <th class="text-left"></th>
+                <th class="text-left hidden sm:table-cell"></th>
                 <th class="text-left">Product</th>
-                <th class="text-left">Price</th>
                 <th class="text-left">Size</th>
                 <th class="text-left">Color</th>
+                <th class="text-left">Price</th>
 
                 <th class="text-left">Quantity</th>
                 <th class="text-left">Total</th>
@@ -18,16 +18,16 @@
             <tbody>
             @foreach($this->items as $item)
                 <tr wire:key="{{ $item->id }}" >
-                    <td class="flex items-center">
+                    <td class="flex items-center hidden sm:table-cell">
 
                         <img src="{{ Storage::url($item->product->image->path) }}" alt="{{ $item->product->name }}" class="h-8 w-8">
 
 
                     </td>
                     <td><span>{{ $item->product->name }}  </span></td>
+                    <td><span>{{ $item->variant->size }}</span></td>
+                    <td><span>{{ $item->variant->color }}</span></td>
                     <td><span>{{ $item->product->price }}</span></td>
-                    <td><span>Size: {{ $item->variant->size }}</span></td>
-                    <td><span>Color: {{ $item->variant->color }}</span></td>
                     <td class="flex space-x-2">
                         <button wire:click="increment({{ $item->id }})">
 
@@ -51,7 +51,7 @@
 
                     </td>
                     <td><span>{{ $item->subtotal }}</span></td>
-                    <td>
+                    <td class="text-right">
                         <button wire:click="removeItem({{ $item->id }})" class="text-red-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                  stroke="currentColor" class="size-5">
@@ -73,8 +73,8 @@
             </tfoot>
         </table>
     </x-panel>
-    <div>
-        <x-panel class="col-span-1">
+    <div class="md:col-span-1 col-span-4 ">
+        <x-panel>
             @guest()
                 <div class="flex flex-col space-y-4">
                     <a href="{{ route('login') }}"
