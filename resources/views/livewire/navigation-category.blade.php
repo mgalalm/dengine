@@ -2,7 +2,7 @@
     <li class="relative group inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
         <button>Products</button>
         <div
-            class="absolute top-0 left-0 group-hover:translate-y-5 translate-y-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 z-50 min-w-[560px] transform">
+            class="absolute top-0 left-0 group-hover:translate-y-5 translate-y-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 z-50 sm:min-w-[560px] min-w-72 transform">
             <div class="relative top-6 p-6 bg-white rounded-xl shadow-xl w-full">
                 <div
                     class="w-10 h-10 bg-white transform rotate-45 absolute top-0 z-0 translate-x-0 transition-transform group-hover:translate-x-[12rem] duration-500 ease-in-out rounded-sm"
@@ -10,7 +10,7 @@
 
                 <div class="relative z-10">
 
-                    <div class="grid grid-cols-4 gap-6">
+                    <div class="grid sm:grid-cols-4 gap-6 grid-cols-2">
                         @foreach($this->parents as $parent)
                             <div class="col-span-1">
                                 <p class="uppercase tracking-wider text-gray-500 font-medium text-[13px]">
