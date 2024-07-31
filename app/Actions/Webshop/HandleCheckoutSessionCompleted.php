@@ -18,12 +18,14 @@ class HandleCheckoutSessionCompleted
 
         DB::transaction(function () use ($sessionId) {
             // Get the session
+            \Log::info('# Beginning of the transaction');
             $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
 
             // Get the user and cart from the session metadata
             $user = User::find($session->metadata->user_id);
             $cart = Cart::find($session->metadata->cart_id);
 
+            \Log::info('# After  Retrieve the session ');
             // Create the order
             $order = $user->orders()->create([
                 'stripe_checkout_session_id' => $sessionId,
@@ -55,8 +57,12 @@ class HandleCheckoutSessionCompleted
                 ],
             ]);
 
+            \Log::info('# After  Order create ');
+
             // Get the line items from the session
             $lineItems = Cashier::stripe()->checkout->sessions->allLineItems($sessionId);
+
+            \Log::info('# After  Get the line items from the session');
 
             // Create the order items
             $orderItems = collect($lineItems->all())->map(function(LineItem $lineItem) {
@@ -76,14 +82,22 @@ class HandleCheckoutSessionCompleted
                 ];
             });
 
+
             $order->items()->createMany($orderItems->toArray());
+
+            \Log::info('# After  Create the order items ');
 
             // Empty the cart
             $cart->items()->delete();
             $cart->delete();
 
+            \Log::info('# After  Empty the cart ');
+
             // Send the order confirmation email
             Mail::to($user)->send(new OrderConfirmation($order));
+            \Log::info('# After  Empty the cart ');
+
+            \Log::info('# End of the transaction');
         });
 
     }
